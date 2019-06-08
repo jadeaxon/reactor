@@ -35,10 +35,20 @@ reactions.append(r)
 r = ('move', 'Discord.lnk', 'Comms')
 reactions.append(r)
 
-
 r = ('move', 'iTunes.lnk', 'Media')
 reactions.append(r)
 r = ('move', 'Kindle.lnk', 'Media')
+reactions.append(r)
+
+r = ('move', 'WinDirStat.lnk', 'System\\Diagnostics')
+reactions.append(r)
+r = ('move', 'Speccy.lnk', 'System\\Diagnostics')
+reactions.append(r)
+
+r = ('move', 'Canon Quick Menu.lnk', 'System\\Peripherals\\Scanner')
+reactions.append(r)
+
+r = ('move', 'VeraCrypt.lnk', 'System\\Security')
 reactions.append(r)
 
 
