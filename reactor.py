@@ -21,6 +21,10 @@ desktop = f'{home}\\Desktop'
 
 
 # TO DO: Read reactions from JSON file.
+# TO DO: Reread config if it has changed.
+# TO DO: Tray icon that allows disable/enable.
+# TO DO: Regex-based move.
+
 reactions = []
 r = ('move', 'Microsoft Teams.lnk', 'Comms')
 reactions.append(r)
@@ -39,11 +43,24 @@ r = ('move', 'iTunes.lnk', 'Media')
 reactions.append(r)
 r = ('move', 'Kindle.lnk', 'Media')
 reactions.append(r)
+r = ('move', 'VLC media player.lnk', 'Media')
+reactions.append(r)
+
+r = ('move', 'Steam.lnk', 'Games')
+reactions.append(r)
+r = ('move', 'GeForce Experience.lnk', 'Games')
+reactions.append(r)
+r = ('move', 'Goat Simulator.lnk', 'Games')
+reactions.append(r)
 
 r = ('move', 'WinDirStat.lnk', 'System\\Diagnostics')
 reactions.append(r)
 r = ('move', 'Speccy.lnk', 'System\\Diagnostics')
 reactions.append(r)
+
+r = ('move', 'Launchy.lnk', 'System\\Productivity')
+reactions.append(r)
+
 
 r = ('move', 'Canon Quick Menu.lnk', 'System\\Peripherals\\Scanner')
 reactions.append(r)
