@@ -50,7 +50,7 @@ r = ('move', 'Steam.lnk', 'Games')
 reactions.append(r)
 r = ('move', 'GeForce Experience.lnk', 'Games')
 reactions.append(r)
-r = ('move', 'Goat Simulator.lnk', 'Games')
+r = ('move', 'Goat Simulator.url', 'Games')
 reactions.append(r)
 
 r = ('move', 'WinDirStat.lnk', 'System\\Diagnostics')
