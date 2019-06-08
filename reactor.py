@@ -1,6 +1,7 @@
 # PRE: Running from Windows.
 
 from sys import stdout
+from sys import stderr
 from sys import argv
 import time
 import os
@@ -74,7 +75,8 @@ def move(fromFile, toDir):
 
 print(f'{S}: Started.')
 while True:
-    stdout.flush();
+    stdout.flush()
+    stderr.flush()
     for r in reactions:
         # TO DO: Dynamically call right function.
         if r[0] == 'move':
