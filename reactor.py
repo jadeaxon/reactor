@@ -72,6 +72,10 @@ reactions.append(r)
 r = ('move_regex', '^gVim.*[.]lnk$', 'Editors')
 reactions.append(r)
 
+r = ('move_regex', '^Universal-USB-Installer-.*[.]exe', 'Utilities')
+reactions.append(r)
+
+
 
 #==============================================================================
 # Functions
