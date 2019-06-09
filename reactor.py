@@ -5,6 +5,7 @@ from sys import stderr
 from sys import argv
 import time
 import os
+import re
 
 
 #==============================================================================
@@ -68,6 +69,9 @@ reactions.append(r)
 r = ('move', 'VeraCrypt.lnk', 'System\\Security')
 reactions.append(r)
 
+r = ('move_regex', '^gVim.*[.]lnk$', 'Editors')
+reactions.append(r)
+
 
 #==============================================================================
 # Functions
@@ -88,6 +92,20 @@ def move(fromFile, toDir):
             os.remove(toPath)
 
         os.rename(fromPath, toPath)
+    return
+
+
+# Moves a file from the desktop to a subfolder if it matches given regex.
+# Creates directory if necessary.  Clobbers existing files.
+def moveRegex(fromPattern, toDir):
+    pattern = re.compile(fromPattern)
+    nodes = os.listdir(desktop)
+    paths = [f'{desktop}\\{n}' for n in nodes if pattern.match(n)]
+    files = [path for path in paths if os.path.isfile(path)]
+    files = [os.path.basename(f) for f in files]
+    for f in files:
+        move(f, toDir)
+    return
 
 
 #==============================================================================
@@ -104,10 +122,18 @@ print(f'{S}: Started.')
 while True:
     stdout.flush()
     stderr.flush()
+
+    if os.path.exists('stop'):
+        print(f'{S}: Stopped by signal file.')
+        exit(0)
+
     for r in reactions:
         # TO DO: Dynamically call right function.
         if r[0] == 'move':
             move(r[1], r[2])
+        elif r[0] == 'move_regex':
+            moveRegex(r[1], r[2])
     time.sleep(5)
+
 
 
