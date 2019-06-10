@@ -69,6 +69,9 @@ reactions.append(r)
 r = ('move', 'VeraCrypt.lnk', 'System\\Security')
 reactions.append(r)
 
+r = ('move', 'KeePass (Portable).lnk', 'System\\Security')
+reactions.append(r)
+
 r = ('move_regex', '^gVim.*[.]lnk$', 'Editors')
 reactions.append(r)
 
