@@ -43,6 +43,9 @@ r = ('move', 'Microsoft Edge.lnk', 'Comm')
 reactions.append(r)
 r = ('move', 'Discord.lnk', 'Comm')
 reactions.append(r)
+r = ('move', 'FileZilla Client.lnk', 'Comm')
+reactions.append(r)
+
 
 r = ('move', 'iTunes.lnk', 'Media')
 reactions.append(r)
@@ -83,10 +86,16 @@ r = ('move_regex', '^Universal-USB-Installer-.*[.]exe', 'Utilities')
 reactions.append(r)
 
 
-
 #==============================================================================
 # Functions
 #==============================================================================
+
+
+# Add a reaction.
+def reaction(r, a1, a2):
+    global reactions
+    r = (r, a1, a2)
+    reactions.append(r)
 
 # Moves a file from the desktop to a subfolder of the desktop.
 # Creates directory if necessary.  Clobbers existing files.
@@ -149,6 +158,15 @@ def moveRegex(fromPattern, toDir):
 #==============================================================================
 # Main
 #==============================================================================
+
+reaction('move', 'Excel.lnk', 'Office')
+reaction('move', 'Work.lnk', 'Office')
+reaction('move', 'PowerPoint.lnk', 'Office')
+reaction('move', 'Outlook.lnk', 'Office')
+reaction('move_regex', '^Excel .*[.]lnk$', 'Office')
+reaction('move_regex', '^Word .*[.]lnk$', 'Office')
+reaction('move_regex', '^PowerPoint .*[.]lnk$', 'Office')
+reaction('move_regex', '^Outlook .*[.]lnk$', 'Office')
 
 
 print(f'{S}: Started.')
