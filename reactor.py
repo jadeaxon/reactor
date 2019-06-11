@@ -38,7 +38,7 @@ reactions = []
 #==============================================================================
 
 # Add a reaction.
-def reaction(r, a1, a2):
+def reaction(r, a1=None, a2=None):
     global reactions
     r = (r, a1, a2)
     reactions.append(r)
@@ -81,6 +81,7 @@ def move(fromFile, toDir):
 # Moves a file from the desktop to a subfolder if it matches given regex.
 # Creates directory if necessary.  Clobbers existing files.
 def moveRegex(fromPattern, toDir):
+    global desktop
     pattern = re.compile(fromPattern)
     nodes = os.listdir(desktop)
     paths = [f'{desktop}\\{n}' for n in nodes if pattern.match(n)]
@@ -95,6 +96,22 @@ def moveRegex(fromPattern, toDir):
         move(f, toDir)
     return
 
+# Renames shortcuts in the Desktop directory.
+def renameShortcuts():
+    pattern = re.compile('^.* (- Shortcut).lnk')
+    nodes = os.listdir(desktop)
+
+    paths = [f'{desktop}\\{n}' for n in nodes if pattern.match(n)]
+    files = [path for path in paths if os.path.isfile(path)]
+    files = [os.path.basename(f) for f in files]
+    for f in files:
+        # Windows has the annoying habit of appending - Shortcut to all shortcuts.
+        # You can disable this in the registery, but Windows reenables it after each ugrade.
+        # Yes, I could just rig something to reapply that registry change all the time, but I didn't.
+        f2 = re.sub(' [-] Shortcut', '', f)
+        print(f'{S}: {f} -> {f2}.')
+        os.rename(f'{desktop}\\{f}', f'{desktop}\\{f2}')
+
 
 #==============================================================================
 # Tests
@@ -104,6 +121,8 @@ def moveRegex(fromPattern, toDir):
 #==============================================================================
 # Main
 #==============================================================================
+
+reaction('rename_shortcuts')
 
 reaction('move', 'Microsoft Teams.lnk', 'Comm')
 reaction('move', 'Google Chrome.lnk', 'Comm')
@@ -159,6 +178,8 @@ while True:
             move(r[1], r[2])
         elif r[0] == 'move_regex':
             moveRegex(r[1], r[2])
+        elif r[0] == 'rename_shortcuts':
+            renameShortcuts()
     time.sleep(5)
 
 
