@@ -20,6 +20,8 @@ user = os.environ['USERNAME']
 home = os.environ['USERPROFILE']
 desktop = f'{home}\\Desktop'
 
+# When apps are installed for all users, shared links will be created here.
+public_desktop = 'C:\\Users\\Public\\Desktop'
 
 # TO DO: Read reactions from JSON file.
 # TO DO: Reread config if it has changed.
@@ -88,6 +90,7 @@ reactions.append(r)
 # Creates directory if necessary.  Clobbers existing files.
 def move(fromFile, toDir):
     fromPath = f'{desktop}\\{fromFile}'
+    fromPublicPath = f'{public_desktop}\\{fromFile}'
     toDirPath = f'{desktop}\\{toDir}'
     toPath = f'{toDirPath}\\{fromFile}'
 
@@ -99,6 +102,15 @@ def move(fromFile, toDir):
             os.remove(toPath)
 
         os.rename(fromPath, toPath)
+    elif os.path.exists(fromPublicPath):
+        print(f'{S}: {fromPublicPath} -> {toPath}.')
+        if not os.path.exists(toDirPath):
+            os.mkdir(toDirPath)
+        if os.path.exists(toPath):
+            os.remove(toPath)
+
+        os.rename(fromPublicPath, toPath)
+
     return
 
 
@@ -108,6 +120,11 @@ def moveRegex(fromPattern, toDir):
     pattern = re.compile(fromPattern)
     nodes = os.listdir(desktop)
     paths = [f'{desktop}\\{n}' for n in nodes if pattern.match(n)]
+
+    public_nodes = os.listdir(public_desktop)
+    public_paths = [f'{public_desktop}\\{n}' for n in public_nodes if pattern.match(n)]
+
+    paths += public_paths
     files = [path for path in paths if os.path.isfile(path)]
     files = [os.path.basename(f) for f in files]
     for f in files:
