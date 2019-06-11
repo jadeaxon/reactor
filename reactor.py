@@ -20,8 +20,10 @@ user = os.environ['USERNAME']
 home = os.environ['USERPROFILE']
 desktop = f'{home}\\Desktop'
 
+
 # When apps are installed for all users, shared links will be created here.
-public_desktop = 'C:\\Users\\Public\\Desktop'
+publicDesktop = 'C:\\Users\\Public\\Desktop'
+publicDesktopAccessible = True
 
 # TO DO: Read reactions from JSON file.
 # TO DO: Reread config if it has changed.
@@ -89,8 +91,9 @@ reactions.append(r)
 # Moves a file from the desktop to a subfolder of the desktop.
 # Creates directory if necessary.  Clobbers existing files.
 def move(fromFile, toDir):
+    global publicDesktopAccessible
     fromPath = f'{desktop}\\{fromFile}'
-    fromPublicPath = f'{public_desktop}\\{fromFile}'
+    fromPublicPath = f'{publicDesktop}\\{fromFile}'
     toDirPath = f'{desktop}\\{toDir}'
     toPath = f'{toDirPath}\\{fromFile}'
 
@@ -103,13 +106,19 @@ def move(fromFile, toDir):
 
         os.rename(fromPath, toPath)
     elif os.path.exists(fromPublicPath):
-        print(f'{S}: {fromPublicPath} -> {toPath}.')
-        if not os.path.exists(toDirPath):
-            os.mkdir(toDirPath)
-        if os.path.exists(toPath):
-            os.remove(toPath)
+        if publicDesktopAccessible:
+            print(f'{S}: {fromPublicPath} -> {toPath}.')
+            if not os.path.exists(toDirPath):
+                os.mkdir(toDirPath)
+            if os.path.exists(toPath):
+                os.remove(toPath)
 
-        os.rename(fromPublicPath, toPath)
+            try:
+                os.rename(fromPublicPath, toPath)
+            except PermissionError as e:
+                # On work machines, access is denied to this folder.
+                print(f'{S}: WARNING: Public desktop is not accessible.');
+                publicDesktopAccessible = False
 
     return
 
@@ -121,8 +130,8 @@ def moveRegex(fromPattern, toDir):
     nodes = os.listdir(desktop)
     paths = [f'{desktop}\\{n}' for n in nodes if pattern.match(n)]
 
-    public_nodes = os.listdir(public_desktop)
-    public_paths = [f'{public_desktop}\\{n}' for n in public_nodes if pattern.match(n)]
+    public_nodes = os.listdir(publicDesktop)
+    public_paths = [f'{publicDesktop}\\{n}' for n in public_nodes if pattern.match(n)]
 
     paths += public_paths
     files = [path for path in paths if os.path.isfile(path)]
