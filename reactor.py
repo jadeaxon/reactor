@@ -28,68 +28,14 @@ publicDesktopAccessible = True
 # TO DO: Read reactions from JSON file.
 # TO DO: Reread config if it has changed.
 # TO DO: Tray icon that allows disable/enable.
-# TO DO: Regex-based move.
 
+# All the reactions to potentially trigger each iteration.
 reactions = []
-r = ('move', 'Microsoft Teams.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'Google Chrome.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'Slack.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'Skype.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'Microsoft Edge.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'Discord.lnk', 'Comm')
-reactions.append(r)
-r = ('move', 'FileZilla Client.lnk', 'Comm')
-reactions.append(r)
-
-
-r = ('move', 'iTunes.lnk', 'Media')
-reactions.append(r)
-r = ('move', 'Kindle.lnk', 'Media')
-reactions.append(r)
-r = ('move', 'VLC media player.lnk', 'Media')
-reactions.append(r)
-
-r = ('move', 'Steam.lnk', 'Games')
-reactions.append(r)
-r = ('move', 'GeForce Experience.lnk', 'Games')
-reactions.append(r)
-r = ('move', 'Goat Simulator.url', 'Games')
-reactions.append(r)
-
-r = ('move', 'WinDirStat.lnk', 'System\\Diagnostics')
-reactions.append(r)
-r = ('move', 'Speccy.lnk', 'System\\Diagnostics')
-reactions.append(r)
-
-r = ('move', 'Launchy.lnk', 'System\\Productivity')
-reactions.append(r)
-
-
-r = ('move', 'Canon Quick Menu.lnk', 'System\\Peripherals\\Scanner')
-reactions.append(r)
-
-r = ('move', 'VeraCrypt.lnk', 'System\\Security')
-reactions.append(r)
-
-r = ('move', 'KeePass (Portable).lnk', 'System\\Security')
-reactions.append(r)
-
-r = ('move_regex', '^gVim.*[.]lnk$', 'Editors')
-reactions.append(r)
-
-r = ('move_regex', '^Universal-USB-Installer-.*[.]exe', 'Utilities')
-reactions.append(r)
 
 
 #==============================================================================
 # Functions
 #==============================================================================
-
 
 # Add a reaction.
 def reaction(r, a1, a2):
@@ -159,6 +105,36 @@ def moveRegex(fromPattern, toDir):
 # Main
 #==============================================================================
 
+reaction('move', 'Microsoft Teams.lnk', 'Comm')
+reaction('move', 'Google Chrome.lnk', 'Comm')
+reaction('move', 'Slack.lnk', 'Comm')
+reaction('move', 'Skype.lnk', 'Comm')
+reaction('move', 'Microsoft Edge.lnk', 'Comm')
+reaction('move', 'Discord.lnk', 'Comm')
+reaction('move', 'FileZilla Client.lnk', 'Comm')
+
+reaction('move', 'iTunes.lnk', 'Media')
+reaction('move', 'Kindle.lnk', 'Media')
+reaction('move', 'VLC media player.lnk', 'Media')
+
+reaction('move', 'Steam.lnk', 'Games')
+reaction('move', 'GeForce Experience.lnk', 'Games')
+reaction('move', 'Goat Simulator.url', 'Games')
+
+reaction('move', 'WinDirStat.lnk', 'System\\Diagnostics')
+reaction('move', 'Speccy.lnk', 'System\\Diagnostics')
+
+reaction('move', 'Launchy.lnk', 'System\\Productivity')
+
+reaction('move', 'Canon Quick Menu.lnk', 'System\\Peripherals\\Scanner')
+
+reaction('move', 'VeraCrypt.lnk', 'System\\Security')
+reaction('move', 'KeePass (Portable).lnk', 'System\\Security')
+
+reaction('move_regex', '^gVim.*[.]lnk$', 'Editors')
+
+reaction('move_regex', '^Universal-USB-Installer-.*[.]exe', 'Utilities')
+
 reaction('move', 'Excel.lnk', 'Office')
 reaction('move', 'Work.lnk', 'Office')
 reaction('move', 'PowerPoint.lnk', 'Office')
@@ -167,7 +143,6 @@ reaction('move_regex', '^Excel .*[.]lnk$', 'Office')
 reaction('move_regex', '^Word .*[.]lnk$', 'Office')
 reaction('move_regex', '^PowerPoint .*[.]lnk$', 'Office')
 reaction('move_regex', '^Outlook .*[.]lnk$', 'Office')
-
 
 print(f'{S}: Started.')
 while True:
