@@ -29,17 +29,17 @@ public_desktop = 'C:\\Users\\Public\\Desktop'
 # TO DO: Regex-based move.
 
 reactions = []
-r = ('move', 'Microsoft Teams.lnk', 'Comms')
+r = ('move', 'Microsoft Teams.lnk', 'Comm')
 reactions.append(r)
-r = ('move', 'Google Chrome.lnk', 'Comms')
+r = ('move', 'Google Chrome.lnk', 'Comm')
 reactions.append(r)
-r = ('move', 'Slack.lnk', 'Comms')
+r = ('move', 'Slack.lnk', 'Comm')
 reactions.append(r)
-r = ('move', 'Skype.lnk', 'Comms')
+r = ('move', 'Skype.lnk', 'Comm')
 reactions.append(r)
-r = ('move', 'Microsoft Edge.lnk', 'Comms')
+r = ('move', 'Microsoft Edge.lnk', 'Comm')
 reactions.append(r)
-r = ('move', 'Discord.lnk', 'Comms')
+r = ('move', 'Discord.lnk', 'Comm')
 reactions.append(r)
 
 r = ('move', 'iTunes.lnk', 'Media')
