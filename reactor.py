@@ -131,6 +131,7 @@ reaction('move', 'Skype.lnk', 'Comm')
 reaction('move', 'Microsoft Edge.lnk', 'Comm')
 reaction('move', 'Discord.lnk', 'Comm')
 reaction('move', 'FileZilla Client.lnk', 'Comm')
+reaction('move', 'Mozilla Thunderbird.lnk', 'Comm')
 
 reaction('move', 'iTunes.lnk', 'Media')
 reaction('move', 'Kindle.lnk', 'Media')
