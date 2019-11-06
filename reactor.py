@@ -1,4 +1,7 @@
 # PRE: Running from Windows.
+# PRE: icacls C:\Users\Public\Desktop /grant Everyone:(CI)(F) /t /l /q
+# As administrator.  Allow anyone to edit the public desktop folder.
+# Might need a scheduled task to run this daily.
 
 from sys import stdout
 from sys import stderr
