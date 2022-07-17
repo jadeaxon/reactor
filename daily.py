@@ -1,22 +1,26 @@
 #!/usr/bin/python3
 
+# This is called from daily.bat which is called from a task in Windows Task Scheduler.
+# The log is in ~/projects/reactor/log/daily.<host>.log.
+
 import os
 from datetime import date
 
-host = os.getenv("COMPUTERNAME")
-home = os.getenv("USERPROFILE")
-path = home + r"\Dropbox\Organization\Progress\Home\Progress (Home).txt"
-# print(home)
-# print(path)
-# print(host)
 
-# host = "Inspiron-VM"
+#==============================================================================
+# Functions
+#==============================================================================
 
-# This is only supposed to run on Inspiron-VM from a Windows scheduled task.
-if host != "Inspiron-VM":
-    print("daily.py: ERROR: Wrong host.  Inspiron-VM expected.")
-    exit(1)
-else:
+def writeProgressHeader():
+    host = os.getenv("COMPUTERNAME")
+    home = os.getenv("USERPROFILE")
+    path = home + r"\Dropbox\Organization\Progress\Home\Progress (Home).txt"
+    # print(home)
+    # print(path)
+    # print(host)
+
+    print("daily.py: Running.")
+
     today = date.today()
     formatted = today.strftime("%Y-%m-%d")
     day = today.strftime("%a")
@@ -35,6 +39,14 @@ else:
     f.write(content)
     f.flush()
     f.close()
+    return
 
+
+#==============================================================================
+# Main
+#==============================================================================
+
+writeProgressHeader()
 exit(0)
+
 
