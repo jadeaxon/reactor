@@ -32,8 +32,14 @@ def writeProgressHeader():
     # If you don't do this, you'll see ^M in Vim due to Windows line endings being written.
     # Even though your string has \n above, when file is open in text mode, it translates it
     # to OS line ending.  You could also open the file in binary mode to avoid this.
-    f = open(path, "r+", newline="\n")
+    f = open(path, "r+", newline="\n", encoding="utf-8")
     content = f.read()
+
+    lines = content.split("\n")
+    if (lines[0].strip() == line.strip()):
+        # print("Already ran today.")
+        return
+
     f.seek(0, 0)
     f.write(line)
     f.write(content)
